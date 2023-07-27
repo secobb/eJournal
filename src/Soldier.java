@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,13 +6,13 @@ class Soldier {
     private String name;
     private String rank;
     private String group;
-    private Map<String, Integer> grades;
+    private Map <Grades> grades;
 
     Soldier(String name, String rank, String group){
         this.name = name;
         this.rank = rank;
         this.group = group;
-        this.grades = new HashMap<>();
+        this.grades = new Grades();
     }
     public String getName() {
         return name;
@@ -33,11 +32,11 @@ class Soldier {
     public void setGroup(String group) {
         this.group = group;
     }
-    public List<Grade> getGrades() {
+    public List<Grades> getGrades() {
         return grades;
     }
-    public void addGrade(Grade grade){
-        grades.add(grade);
+    public void addGrade(Grades grade){
+        grades.put(grade);
     }
     @Override
     public String toString() {
