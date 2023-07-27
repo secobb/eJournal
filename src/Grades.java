@@ -7,7 +7,7 @@ class Grades {
     private Map<String, Integer> gradesMap;
     Grades(){
         this.gradesMap = new HashMap<>();
-    };
+    }
     Grades(String subject, int grade){
         this.subject = subject;
         this.grade = grade;

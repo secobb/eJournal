@@ -1,7 +1,3 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 class Soldier {
     private String name;
     private String rank;
