@@ -6,7 +6,7 @@ class Soldier {
     private String name;
     private String rank;
     private String group;
-    private Map <Grades> grades;
+    private Grades grades;
 
     Soldier(String name, String rank, String group){
         this.name = name;
@@ -32,11 +32,9 @@ class Soldier {
     public void setGroup(String group) {
         this.group = group;
     }
-    public List<Grades> getGrades() {
-        return grades;
-    }
-    public void addGrade(Grades grade){
-        grades.put(grade);
+
+    public void addGrades(String subject, int grade){
+        grades.setGradesMap(subject, grade);
     }
     @Override
     public String toString() {

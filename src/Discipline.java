@@ -2,13 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Discipline {
+    private String subject;
     private List<String> subjects;
-    Discipline(){
+    Discipline(String subject){
+        this.subject = subject;
         this.subjects = new ArrayList<>();
     }
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
+
     public List<String> getSubjects() {
         return subjects;
     }

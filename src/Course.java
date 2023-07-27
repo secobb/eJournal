@@ -22,6 +22,8 @@ public class Course {
         return groupSoldier;
     }
     public static void main(String[] args) {
-
+        Soldier soldier1 = new Soldier("Голубенко Сергій", "старший сержант", "2101");
+        soldier1.addGrades("Математика", 95);
+        System.out.println(soldier1);
     }
 }
