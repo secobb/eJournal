@@ -3,17 +3,17 @@ import java.util.Map;
 
 class Grades {
     private int grade;
-    private String subject;
+    private String discipline;
     private Map<String, Integer> gradesMap;
     Grades(){
         this.gradesMap = new HashMap<>();
     }
-    Grades(String subject, int grade){
-        this.subject = subject;
+    Grades(String discipline, int grade){
+        this.discipline = discipline;
         this.grade = grade;
     }
-    public void setGradesMap(String subject, int grade) {
-        this.gradesMap.put(subject, grade);
+    public void setGradesMap(String discipline, int grade) {
+        this.gradesMap.put(discipline, grade);
     }
     public Map<String, Integer> getGradesMap() {
         return gradesMap;

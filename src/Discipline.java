@@ -4,17 +4,23 @@ import java.util.List;
 public class Discipline {
     private String subject;
     private List<String> subjects;
+    Discipline(){
+        this.subjects = new ArrayList<>();
+    }
     Discipline(String subject){
         this.subject = subject;
         this.subjects = new ArrayList<>();
     }
     public void setSubject(String subject) {
-        this.subject = subject;
+        this.subjects.add(subject);
     }
-
+    public String getSubject(int index) {
+        return subjects.get(index);
+    }
     public List<String> getSubjects() {
         return subjects;
     }
+
     public void add(String discipline) {
         this.subjects.add(discipline);
     }
@@ -23,6 +29,6 @@ public class Discipline {
     }
     @Override
     public String toString() {
-        return subjects.toString();
+        return subject.toString();
     }
 }
