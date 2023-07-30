@@ -21,7 +21,7 @@ public class Course {
     public List<Soldier> getSoldiers() {
         return soldiers;
     }
-    public Soldier updateSoldier (Soldier soldier, String name, String group){
+    public Soldier updateSoldier (soldier, String name, String group){
         soldier.setName(name);
         soldier.setGroup(group);
         return soldier;
