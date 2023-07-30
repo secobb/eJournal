@@ -11,20 +11,32 @@ public class Course {
     public void addSoldier(Soldier soldier){
         soldiers.add(soldier);
     }
+    public void deleteSoldier(Soldier soldier){
+        soldiers.remove(soldier);
+    }
+    public Soldier getSoldier(int id) {
+        return soldiers.get(id);
+    }
+
     public List<Soldier> getSoldiers() {
         return soldiers;
     }
-    public List<Soldier> getSoldiersByGroup(String group){
+    public Soldier updateSoldier (Soldier soldier, String name, String group){
+        soldier.setName(name);
+        soldier.setGroup(group);
+        return soldier;
+    }
+    public List<Soldier> displaySoldiersByGroup(String group){
         List<Soldier> groupSoldier = new ArrayList<>();
         for(Soldier soldier : soldiers){
             if(soldier.getGroup().equals(group)){
                 groupSoldier.add(soldier);
+                System.out.println(soldier);
             }
         }
         return groupSoldier;
     }
     public void displayGradesByGroup(String group) {
-        System.out.println("Grades for students in Group: " + group);
         for (Soldier soldier : soldiers) {
             if (soldier.getGroup().equals(group)) {
                 System.out.println(soldier);
@@ -34,23 +46,21 @@ public class Course {
             }
         }
     }
+
+    public void addGrade(Soldier soldier, String subject, int grade){
+        soldier.getGrades().setGradesMap(subject, grade);
+    }
+
     public static void main(String[] args) {
         Course myCourse = new Course();
-        Discipline myDiscipline = new Discipline();
-        myDiscipline.add("Математика");
-        myDiscipline.add("Фізика");
-        Soldier soldier1 = new Soldier("Голубенко Сергій", "старший сержант", "2101");
-        soldier1.addGrades(myDiscipline.getSubject(0), 95);
-        soldier1.addGrades(myDiscipline.getSubject(1), 94);
-        Soldier soldier2 = new Soldier("Романенко", "старший сержант", "2101");
-        soldier2.addGrades(myDiscipline.getSubject(0), 78);
+        Soldier soldier1 = new Soldier("Голубенко Сергій", "2101");
+        Soldier soldier2 = new Soldier("Романенко", "2101");
         myCourse.addSoldier(soldier1);
         myCourse.addSoldier(soldier2);
+        myCourse.addGrade(soldier1,"Вища математика", 95);
         myCourse.displayGradesByGroup("2101");
-        System.out.println(myDiscipline.getSubjects());
-        myDiscipline.delete("Математика");
-        System.out.println(myDiscipline.getSubjects());
-        myCourse.displayGradesByGroup("2101");
+        myCourse.updateSoldier(soldier2,"Романенко Виктор", "2101");
+        myCourse.displaySoldiersByGroup("2101");
        // System.out.println(soldier1);
     }
 }
