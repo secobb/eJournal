@@ -1,8 +1,8 @@
 class Soldier {
     private String name;
-    private String group;
+    private int group;
     private Grades grades;
-    Soldier(String name, String group){
+    Soldier(String name, int group){
         this.name = name;
         this.group = group;
         this.grades = new Grades();
@@ -13,21 +13,22 @@ class Soldier {
     public void setName(String name) {
         this.name = name;
     }
-   public String getGroup() {
+    public int getGroup() {
         return group;
     }
-    public void setGroup(String group) {
+    public void setGroup(int group) {
         this.group = group;
     }
+
     public Grades getGrades() {
         return grades;
     }
-    //    public void addGrades(String discipline, int grade){
-//        grades.setGradesMap(discipline, grade);
-//    }
+    public void updateGrade(String subject, int grade){
+        this.getGrades().setGradesMap(subject, grade);
+    }
     @Override
     public String toString() {
-        String s = name + " " + group;
+        String s = name + " Група " + group;
         return s;
     }
 }
