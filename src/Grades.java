@@ -19,6 +19,9 @@ class Grades {
     public static List<String> getSubjects() {
         return subjects;
     }
+    public static void addSubject(String subject){
+        subjects.add(subject);
+    }
     public static void delete(String subject){
         subjects.remove(subject);
     }
@@ -32,6 +35,9 @@ class Grades {
                 gradesMap.put(s, grade);
             }
         }
+    }
+    public void addSubject(String subject, int grade){
+        gradesMap.put(subject, 0);
     }
 
     @Override

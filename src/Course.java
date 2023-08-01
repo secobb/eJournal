@@ -22,6 +22,14 @@ public class Course {
         soldier.setName(name);
         soldier.setGroup(group);
     }
+    public void addSubject(String subject){
+        Grades.addSubject(subject);
+        for (Group group : groups){
+            for(Soldier soldier : group.getSolders()){
+                soldier.addSubject(subject);
+            }
+        }
+    }
 
     public void displaySoldiersByGroup(Group group) {
         for (Soldier soldier : group.getSolders())
@@ -61,5 +69,8 @@ public class Course {
         myCourse.updateSoldier(soldier2, "Романенко Віктор", 2101);
         soldier1.updateGrade("Вища математика", 95);
         myCourse.displayGradesByGroup(group1, "Вища математика");
+        myCourse.displayGradesByGroup(group1);
+        myCourse.addSubject("Метрологія");
+        myCourse.displayGradesByGroup(group1);
     }
 }

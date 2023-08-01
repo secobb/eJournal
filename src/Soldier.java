@@ -26,6 +26,9 @@ class Soldier {
     public void updateGrade(String subject, int grade){
         this.getGrades().setGradesMap(subject, grade);
     }
+    public void addSubject(String subject){
+        this.getGrades().addSubject(subject, 0);
+    }
     @Override
     public String toString() {
         String s = name + " Група " + group;
