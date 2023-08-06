@@ -1,15 +1,13 @@
 import java.util.*;
 
 class Grades {
-    private int grade;
     private static List<String> subjects = new ArrayList<String>(Arrays.asList("Вища математика","Фізика","ООП","Історія України","Англійська мова","Українська мова"));;
-    private Map<String, Integer> gradesMap;
+    private Map<String, List<Integer>> gradesMap;
     Grades(){
-        this.grade = 0;
         this.gradesMap = new HashMap<>();
         int i = 0;
         while (i < this.getSubjects().size()){
-            this.gradesMap.put(this.getSubject(i), grade);
+            this.gradesMap.put(this.getSubject(i), new ArrayList<Integer>());
             i++;
         }
     }
@@ -25,19 +23,17 @@ class Grades {
     public static void delete(String subject){
         subjects.remove(subject);
     }
-    public Map<String, Integer> getGradesMap() {
+    public Map<String, List<Integer>> getGradesMap() {
         return gradesMap;
     }
 
     public void setGradesMap(String subject, int grade){
-        for(String s : gradesMap.keySet()){
-            if(s.equals(subject)){
-                gradesMap.put(s, grade);
+            if(this.gradesMap.containsKey(subject)){
+                this.gradesMap.get(subject).add(grade);
             }
         }
-    }
-    public void addSubject(String subject, int grade){
-        gradesMap.put(subject, 0);
+    public void addSubjects(String subject){
+        gradesMap.put(subject, new ArrayList<>());
     }
 
     @Override

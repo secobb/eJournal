@@ -18,9 +18,8 @@ public class Course {
         return groups;
     }
 
-    public void updateSoldier(Soldier soldier, String name, int group) {
+    public void updateSoldier(Soldier soldier, String name) {
         soldier.setName(name);
-        soldier.setGroup(group);
     }
     public void addSubject(String subject){
         Grades.addSubject(subject);
@@ -38,8 +37,8 @@ public class Course {
 
     public void displayGradesByGroup(Group group) {
         for (Soldier soldier : group.getSolders()) {
-            System.out.println(soldier);
-            Map<String, Integer> grades = soldier.getGrades().getGradesMap();
+            System.out.println(soldier+ " Группа: "+group.getGroupId());
+            Map<String, List<Integer>> grades = soldier.getGrades().getGradesMap();
             grades.entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue()).forEach(System.out::println);
             System.out.println();
         }
@@ -47,7 +46,7 @@ public class Course {
     public void displayGradesByGroup(Group group, String subject) {
         for (Soldier soldier : group.getSolders()) {
             System.out.println(soldier);
-            Map<String, Integer> grades = soldier.getGrades().getGradesMap();
+            Map<String, List <Integer>> grades = soldier.getGrades().getGradesMap();
             if(grades.get(subject) == null){
                 System.out.println("Предмет "+subject+" не знайдено");
             }
@@ -60,14 +59,15 @@ public class Course {
     public static void main(String[] args) {
         Course myCourse = new Course();
         Group group1 = new Group(2101);
-        Soldier soldier1 = new Soldier("Голубенко Сергій", 2101);
-        Soldier soldier2 = new Soldier("Романенко", 2101);
+        Soldier soldier1 = new Soldier("Голубенко Сергій");
+        Soldier soldier2 = new Soldier("Романенко");
         group1.addSoldier(soldier1);
         group1.addSoldier(soldier2);
         myCourse.addGroup(group1);
         myCourse.displayGradesByGroup(group1);
-        myCourse.updateSoldier(soldier2, "Романенко Віктор", 2101);
+        myCourse.updateSoldier(soldier2, "Романенко Віктор");
         soldier1.updateGrade("Вища математика", 95);
+        soldier1.updateGrade("Вища математика", 90);
         myCourse.displayGradesByGroup(group1, "Вища математика");
         myCourse.displayGradesByGroup(group1);
         myCourse.addSubject("Метрологія");

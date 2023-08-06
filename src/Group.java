@@ -8,7 +8,7 @@ public class Group {
         this.groupId = groupId;
         this.soldiers = new ArrayList<>();
     }
-    public int getGroupId(int groupId) {
+    public int getGroupId() {
         return this.groupId;
     }
     public void addSoldier(Soldier soldier){
