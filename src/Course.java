@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Course {
     private List<Group> groups;
@@ -44,6 +41,7 @@ public class Course {
         }
     }
     public void displayGradesByGroup(Group group, String subject) {
+            System.out.println("Група: "+group.getGroupId());
         for (Soldier soldier : group.getSolders()) {
             System.out.println(soldier);
             Map<String, List <Integer>> grades = soldier.getGrades().getGradesMap();
@@ -57,7 +55,10 @@ public class Course {
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Електронний журнал обліку успішності підрозділу");
         Course myCourse = new Course();
+
         Group group1 = new Group(2101);
         Soldier soldier1 = new Soldier("Голубенко Сергій");
         Soldier soldier2 = new Soldier("Романенко");

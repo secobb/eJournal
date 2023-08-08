@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Grades {
-    private static List<String> subjects = new ArrayList<String>(Arrays.asList("Вища математика","Фізика","ООП","Історія України","Англійська мова","Українська мова"));;
+    private static List<String> subjects = new ArrayList<String>(Arrays.asList("Вища математика","Фізика","ООП","Історія України","Англійська мова"));;
     private Map<String, List<Integer>> gradesMap;
     Grades(){
         this.gradesMap = new HashMap<>();
