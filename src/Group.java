@@ -14,6 +14,9 @@ public class Group {
     public void addSoldier(Soldier soldier){
         soldiers.add(soldier);
     }
+    public void addSolders(List<Soldier> soldier){
+        soldiers.addAll(soldier);
+    }
     public void removeSoldier(Soldier soldier){
         soldiers.remove(soldier);
     }

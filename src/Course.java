@@ -60,6 +60,8 @@ public class Course {
         Course myCourse = new Course();
 
         Group group1 = new Group(2101);
+        Group group2 = new Group(2102);
+        Group group3 = new Group(2103);
         Soldier soldier1 = new Soldier("Голубенко Сергій");
         Soldier soldier2 = new Soldier("Романенко Віктор");
         Soldier soldier3 = new Soldier("Вікторія Канашкіна");
@@ -79,7 +81,12 @@ public class Course {
         Soldier soldier17 = new Soldier("Ярослав Плетенецький");
         group1.addSoldier(soldier1);
         group1.addSoldier(soldier2);
+        group1.addSolders(Arrays.asList(soldier3,soldier4,soldier5,soldier6));
+        group2.addSolders(Arrays.asList(soldier7,soldier8,soldier9,soldier10,soldier11));
+        group3.addSolders(Arrays.asList(soldier12,soldier13,soldier14,soldier15,soldier16,soldier17));
         myCourse.addGroup(group1);
+        myCourse.addGroup(group2);
+        myCourse.addGroup(group3);
         myCourse.displayGradesByGroup(group1);
         myCourse.updateSoldier(soldier2, "Романенко Віктор");
         soldier1.updateGrade("Вища математика", 95);
