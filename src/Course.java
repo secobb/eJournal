@@ -61,7 +61,22 @@ public class Course {
 
         Group group1 = new Group(2101);
         Soldier soldier1 = new Soldier("Голубенко Сергій");
-        Soldier soldier2 = new Soldier("Романенко");
+        Soldier soldier2 = new Soldier("Романенко Віктор");
+        Soldier soldier3 = new Soldier("Вікторія Канашкіна");
+        Soldier soldier4 = new Soldier("Віталій Вовнянко");
+        Soldier soldier5 = new Soldier("Валентина Зінченко");
+        Soldier soldier6 = new Soldier("Владислав Рябовол");
+        Soldier soldier7 = new Soldier("В'ячеслав Гуменюк");
+        Soldier soldier8 = new Soldier("Данило Ремішевський");
+        Soldier soldier9 = new Soldier("Жанна Михайлюк");
+        Soldier soldier10 = new Soldier("Микола Хоменко");
+        Soldier soldier11 = new Soldier("Надія Кучеренко");
+        Soldier soldier12 = new Soldier("Оксана Лежнюк");
+        Soldier soldier13 = new Soldier("Ольга Танасієнко");
+        Soldier soldier14 = new Soldier("Тетяна Валентюк");
+        Soldier soldier15 = new Soldier("Юлія Петрочкова");
+        Soldier soldier16 = new Soldier("Яна Братченко");
+        Soldier soldier17 = new Soldier("Ярослав Плетенецький");
         group1.addSoldier(soldier1);
         group1.addSoldier(soldier2);
         myCourse.addGroup(group1);
