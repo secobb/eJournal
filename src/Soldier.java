@@ -1,6 +1,7 @@
 class Soldier {
     private String name;
     private Grades grades;
+
     Soldier(String name){
         this.name = name;
         this.grades = new Grades();
@@ -21,6 +22,7 @@ class Soldier {
     public void addSubject(String subject){
         this.getGrades().addSubjects(subject);
     }
+
     @Override
     public String toString() {
         String s = name;
