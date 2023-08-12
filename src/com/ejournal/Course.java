@@ -1,3 +1,5 @@
+package com.ejournal;
+
 import java.util.*;
 
 public class Course {
@@ -23,7 +25,7 @@ public class Course {
         soldier.setName(name);
     }
     public void addSubject(String subject){
-        Grades.addSubject(subject);
+        SubjectsGrades.setSubjects(subject);
         for (Group group : groups){
             for(Soldier soldier : group.getSolders()){
                 soldier.addSubject(subject);

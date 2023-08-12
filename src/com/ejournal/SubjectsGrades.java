@@ -1,15 +1,21 @@
+package com.ejournal;
+
 import java.util.*;
 
-class Grades {
-    private static List<String> subjects = new ArrayList<String>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
-    ;
-    private Map<String, List<Integer>> gradesMap;
+class SubjectsGrades {
+    private static final List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
 
-    Grades() {
+    private final Map<String, List<Integer>> gradesMap;
+
+    SubjectsGrades() {
         this.gradesMap = new HashMap<>();
+        initializeSubjects();
+    }
+
+    public void initializeSubjects(){
         int i = 0;
-        while (i < this.getSubjects().size()) {
-            this.gradesMap.put(this.getSubject(i), new ArrayList<Integer>());
+        while (i < getSubjects().size()) {
+            this.gradesMap.put(getSubject(i), new ArrayList<>());
             i++;
         }
     }
@@ -18,16 +24,16 @@ class Grades {
         return subjects;
     }
 
-    public static void setSubjects(List<String> subjects) {
-        Grades.subjects = subjects;
-    }
-
     public static String getSubject(int index) {
         return subjects.get(index);
     }
 
-    public static void addSubject(String subject) {
+    public static void setSubjects(String subject) {
         subjects.add(subject);
+    }
+
+    public void addSubject(String subject) {
+        gradesMap.put(subject, new ArrayList<>());
     }
 
     public static void removeSubject(String subject) {
@@ -42,10 +48,6 @@ class Grades {
         if (this.gradesMap.containsKey(subject)) {
             this.gradesMap.get(subject).add(grade);
         }
-    }
-
-    public void addSubjects(String subject) {
-        gradesMap.put(subject, new ArrayList<>());
     }
 
     @Override
