@@ -3,8 +3,7 @@ package com.ejournal;
 import java.util.*;
 
 class SubjectsGrades {
-    private static final List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
-
+    private final List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
     private final Map<String, List<Integer>> gradesMap;
 
     SubjectsGrades() {
@@ -20,24 +19,16 @@ class SubjectsGrades {
         }
     }
 
-    public static List<String> getSubjects() {
+    public List<String> getSubjects() {
         return subjects;
     }
 
-    public static String getSubject(int index) {
+    public String getSubject(int index) {
         return subjects.get(index);
     }
 
-    public static void setSubjects(String subject) {
-        subjects.add(subject);
-    }
-
-    public void addSubject(String subject) {
+    public void setSubjects(String subject) {
         gradesMap.put(subject, new ArrayList<>());
-    }
-
-    public static void removeSubject(String subject) {
-        subjects.remove(subject);
     }
 
     public Map<String, List<Integer>> getGradesMap() {
