@@ -17,6 +17,17 @@ public class Course {
         return groups;
     }
 
+    public void displayAll(){
+        String title = "Список військовослужбовців курсу";
+        System.out.println(title.toUpperCase());
+        for (Group group : groups){
+            System.out.println("Група "+group.getGroupId());
+            for (Soldier soldier : group.getSolders()){
+                System.out.println(soldier);
+            }
+        }
+    }
+
     public void updateSoldier(Soldier soldier, String name) {
         soldier.setName(name);
     }
@@ -51,7 +62,7 @@ public class Course {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Електронний журнал обліку успішності підрозділу");
+        System.out.println("Електронний журнал обліку успішності");
         Course myCourse = new Course();
         Group group1 = new Group(2101);
         Group group2 = new Group(2102);
@@ -66,14 +77,21 @@ public class Course {
         group3.addSoldier(new Soldier("В'ячеслав Гуменюк"));
         group3.addSoldier(new Soldier("Данило Ремішевський"));
         group3.addSoldier(new Soldier("Жанна Михайлюк"));
-        myCourse.displayGradesByGroup(group1);
-        group1.getSolders().get(1).addGrade("Вища математика", 95);
-        group1.getSolders().get(1).addGrade("Вища математика", 90);
-        group1.getSolders().get(1).addGrade("Вища математика", 90);
-        myCourse.displayGradesByGroup(group1, "Вища математика");
-        myCourse.addSubjectByGroup("Метрологія", group1);
-        myCourse.displayGradesByGroup(group1);
-        group3.removeSoldier(10);
-        myCourse.displayGradesByGroup(group3);
+        myCourse.displayAll();
+//        System.out.println("1. Військовослужбовці.");
+//        System.out.println("2. Предмети.");
+//        System.out.println("3. Оцінки.");
+//        System.out.println("4. Звіти");
+//        System.out.println("Введіть номер пункту меню та нажміть Enter");
+//
+//        myCourse.displayGradesByGroup(group1);
+//        group1.getSolders().get(1).addGrade("Вища математика", 95);
+//        group1.getSolders().get(1).addGrade("Вища математика", 90);
+//        group1.getSolders().get(1).addGrade("Вища математика", 90);
+//        myCourse.displayGradesByGroup(group1, "Вища математика");
+//        myCourse.addSubjectByGroup("Метрологія", group1);
+//        myCourse.displayGradesByGroup(group1);
+//        group3.removeSoldier(10);
+//        myCourse.displayGradesByGroup(group3);
     }
 }

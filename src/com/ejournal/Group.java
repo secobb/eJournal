@@ -21,7 +21,6 @@ public class Group {
     }
 
     public void addSoldier(Soldier soldier) {
-        soldier.setGroupId(this.groupId);
         soldiers.add(soldier);
     }
 
