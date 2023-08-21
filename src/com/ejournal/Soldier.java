@@ -7,6 +7,7 @@ class Soldier {
     private String name;
     // List subjects and grades
     private final SubjectsGrades subjectsGrades;
+    private int groupId;
 
     // Constructor
     Soldier(String name) {
@@ -17,6 +18,10 @@ class Soldier {
 
     public int getId() {
         return id;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     // get name soldier
@@ -52,6 +57,6 @@ class Soldier {
 
     @Override
     public String toString() {
-        return id+" "+name;
+        return id + " " + name + " Група: " + groupId;
     }
 }
