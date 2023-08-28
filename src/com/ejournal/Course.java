@@ -3,21 +3,27 @@ package com.ejournal;
 import java.util.*;
 
 public class Course {
-    private List<Group> groups;
+    // list groups
+    private static List<Group> groups;
 
+    // constructor
     Course() {
         this.groups = new ArrayList<>();
     }
 
+    // add groups to course
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 
-    public List<Group> getGroups() {
+    // get list of groups
+    public static List<Group> getGroups() {
         return groups;
     }
 
-    public void displayAll(){
+
+    // display list of all soldiers
+    public static void displayAll(){
         String title = "Список військовослужбовців курсу";
         System.out.println(title.toUpperCase());
         for (Group group : groups){
@@ -28,16 +34,41 @@ public class Course {
         }
     }
 
+    public static void addSoldier(){
+        Scanner scanner = new Scanner(System.in);
+        boolean flag = false;
+        System.out.println("Введіть прізвище та ім'я військовослужбовця: ");
+        String name = scanner.nextLine();
+        while (!flag) {
+        System.out.println("Введіть номер групи: ");
+        int idGroup = scanner.nextInt();
+            for (Group group : groups) {
+                if (group.getGroupId() == idGroup) {
+                    group.addSoldier(new Soldier(name));
+                    flag = true;
+                }
+            }
+            if (flag) {
+                System.out.println("Військовослужбовця додано");
+            } else {
+                System.out.println("Даної групи не існує.");
+            }
+        }
+    }
+
+    // update information about soldier
     public void updateSoldier(Soldier soldier, String name) {
         soldier.setName(name);
     }
 
+    // add subject to group
     public void addSubjectByGroup(String subject, Group group) {
         for (Soldier soldier : group.getSolders()) {
             soldier.addSubject(subject);
         }
     }
 
+    // display all subjects and grades for group of soldiers
     public void displayGradesByGroup(Group group) {
         for (Soldier soldier : group.getSolders()) {
             System.out.println(soldier);
@@ -47,6 +78,7 @@ public class Course {
         }
     }
 
+    // display grades for subject
     public void displayGradesByGroup(Group group, String subject) {
         System.out.println("Група: " + group.getGroupId());
         for (Soldier soldier : group.getSolders()) {
@@ -62,6 +94,7 @@ public class Course {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int mainChoice = 0;
         System.out.println("Електронний журнал обліку успішності");
         Course myCourse = new Course();
         Group group1 = new Group(2101);
@@ -77,7 +110,12 @@ public class Course {
         group3.addSoldier(new Soldier("В'ячеслав Гуменюк"));
         group3.addSoldier(new Soldier("Данило Ремішевський"));
         group3.addSoldier(new Soldier("Жанна Михайлюк"));
-        myCourse.displayAll();
+        do{
+            printMainMenu();
+            mainChoice = scanner.nextInt();
+            handleChoiceMainMenu(mainChoice, scanner);
+        } while (mainChoice != 3);
+
 //        System.out.println("1. Військовослужбовці.");
 //        System.out.println("2. Предмети.");
 //        System.out.println("3. Оцінки.");
@@ -93,5 +131,66 @@ public class Course {
 //        myCourse.displayGradesByGroup(group1);
 //        group3.removeSoldier(10);
 //        myCourse.displayGradesByGroup(group3);
+    }
+
+    public static void printMainMenu(){
+        System.out.println("Головне меню. Виберіть опцію:");
+        System.out.println("1. Військовослужбовці");
+        System.out.println("2. Предмети та оцінки");
+        System.out.println("3. Вихід");
+        System.out.print("Введіть номер пункту меню та нажміть Enter: ");
+    }
+
+    public static void handleChoiceMainMenu(int choice, Scanner scanner){
+        switch (choice) {
+            case 1:
+                printSoldierMenu(scanner);
+                break;
+            case 2:
+                System.out.println("Ви обрали Варіант 2");
+                // Додайте код для обробки опції 2
+                break;
+            case 3:
+                System.out.println("Завершення програми.");
+                // Додайте код для обробки опції 3
+                break;
+            default:
+                System.out.println("Невірний вибір. Спробуйте ще раз.");
+                break;
+        }
+    }
+
+    public static void printSoldierMenu(Scanner scanner){
+        int soldierMenuChoice;
+        do {
+            System.out.println("Робота із військовослужбовцями. Виберіть опцію:");
+            System.out.println("1. Список військовослужбовців курсу");
+            System.out.println("2. Додати військовослужбовця до групи");
+            System.out.println("3. Видалити військовослужбовця");
+            System.out.println("4. Назад");
+            soldierMenuChoice = scanner.nextInt();
+            handleChoiceSoldierMenu(soldierMenuChoice);
+        } while (soldierMenuChoice != 4);
+    }
+
+    public static void handleChoiceSoldierMenu(int choice){
+        switch (choice) {
+            case 1:
+                displayAll();
+                break;
+            case 2:
+                addSoldier();
+                break;
+            case 3:
+                System.out.println("Ви обрали Варіант 3");
+                // Додайте код для обробки опції 3
+                break;
+            case 4:
+                System.out.println("Повернення до головного меню.");
+                break;
+            default:
+                System.out.println("Невірний вибір. Спробуйте ще раз.");
+                break;
+        }
     }
 }

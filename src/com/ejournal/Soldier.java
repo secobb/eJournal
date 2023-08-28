@@ -1,12 +1,15 @@
 package com.ejournal;
 
 class Soldier {
+    // count id
     private static int count;
+    // Id soldier
     private final int id;
     // Name soldier
     private String name;
     // List subjects and grades
     private final SubjectsGrades subjectsGrades;
+    // Group id
     private int groupId;
 
     // Constructor
@@ -16,10 +19,12 @@ class Soldier {
         this.subjectsGrades = new SubjectsGrades();
     }
 
+    // get Id
     public int getId() {
         return id;
     }
 
+    // set groupeId
     public void setGroupId(int groupId) {
         this.groupId = groupId;
     }
@@ -39,7 +44,7 @@ class Soldier {
         return subjectsGrades;
     }
 
-    // update grades
+    // add grade
     public void addGrade(String subject, int grade) {
         this.getGrades().setGradesMap(subject, grade);
     }
@@ -57,6 +62,6 @@ class Soldier {
 
     @Override
     public String toString() {
-        return id + " " + name + " Група: " + groupId;
+        return id + " " + name;
     }
 }
