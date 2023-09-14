@@ -4,7 +4,7 @@ class Soldier {
     // count id
     private static int count;
     // Id soldier
-    private final int id;
+    private int id;
     // Name soldier
     private String name;
     // List subjects and grades

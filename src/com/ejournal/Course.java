@@ -21,7 +21,6 @@ public class Course {
         return groups;
     }
 
-
     // display list of all soldiers
     public static void displayAll(){
         String title = "Список військовослужбовців курсу";
@@ -57,8 +56,27 @@ public class Course {
     }
 
     // update information about soldier
-    public void updateSoldier(Soldier soldier, String name) {
-        soldier.setName(name);
+    public static void updateSoldier() {
+        Scanner scanner = new Scanner(System.in);
+        int idSoldier;
+        boolean flagSoldier = false;
+        displayAll();
+        System.out.println("Введіть номер військовослужбовця:");
+        idSoldier = scanner.nextInt();
+            for (Group group : groups) {
+                        for (Soldier soldier : group.getSolders()) {
+                                if (soldier.getId() == idSoldier) {
+                                    Scanner scanNameSoldier = new Scanner(System.in);
+                                    flagSoldier = true;
+                                    System.out.println("Введіть нове ім'я та прізвище:");
+                                    String soldierName = scanNameSoldier.nextLine();
+                                    soldier.setName(soldierName);
+                                }
+                            }
+                        }
+        if(!flagSoldier){
+            System.out.println("Такий номер військовослужбовця не існує.");
+        }
     }
 
     // add subject to group
@@ -135,7 +153,7 @@ public class Course {
 
     public static void printMainMenu(){
         System.out.println("Головне меню. Виберіть опцію:");
-        System.out.println("1. Військовослужбовці");
+        System.out.println("1. Особовий склад");
         System.out.println("2. Предмети та оцінки");
         System.out.println("3. Вихід");
         System.out.print("Введіть номер пункту меню та нажміть Enter: ");
@@ -163,14 +181,16 @@ public class Course {
     public static void printSoldierMenu(Scanner scanner){
         int soldierMenuChoice;
         do {
-            System.out.println("Робота із військовослужбовцями. Виберіть опцію:");
+            System.out.println("Виберіть опцію:");
             System.out.println("1. Список військовослужбовців курсу");
-            System.out.println("2. Додати військовослужбовця до групи");
-            System.out.println("3. Видалити військовослужбовця");
-            System.out.println("4. Назад");
+            System.out.println("2. Додати військовослужбовця");
+            System.out.println("3. Змінити дані військовослужбовця");
+            System.out.println("4. Видалити військовослужбовця");
+            System.out.println("5. Назад");
+            System.out.print("Введіть номер пункту меню та нажміть Enter: ");
             soldierMenuChoice = scanner.nextInt();
             handleChoiceSoldierMenu(soldierMenuChoice);
-        } while (soldierMenuChoice != 4);
+        } while (soldierMenuChoice != 5);
     }
 
     public static void handleChoiceSoldierMenu(int choice){
@@ -182,8 +202,7 @@ public class Course {
                 addSoldier();
                 break;
             case 3:
-                System.out.println("Ви обрали Варіант 3");
-                // Додайте код для обробки опції 3
+                updateSoldier();
                 break;
             case 4:
                 System.out.println("Повернення до головного меню.");
