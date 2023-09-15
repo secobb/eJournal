@@ -33,6 +33,7 @@ public class Course {
         }
     }
 
+    // add soldier to group
     public static void addSoldier(){
         Scanner scanner = new Scanner(System.in);
         boolean flag = false;
@@ -71,6 +72,7 @@ public class Course {
                                     System.out.println("Введіть нове ім'я та прізвище:");
                                     String soldierName = scanNameSoldier.nextLine();
                                     soldier.setName(soldierName);
+                                    System.out.println("Дані військовослужбовця змінено");
                                 }
                             }
                         }
@@ -79,36 +81,140 @@ public class Course {
         }
     }
 
-    // add subject to group
-    public void addSubjectByGroup(String subject, Group group) {
+    // delete soldier
+    public static void deleteSoldier(){
+        Scanner scanner = new Scanner(System.in);
+        int idSoldier;
+        boolean flagSoldier = false;
+        displayAll();
+        System.out.println("Введіть номер військовослужбовця, якого ви хочете видалити:");
+        idSoldier = scanner.nextInt();
+        for (Group group : groups) {
+            for (Soldier soldier : group.getSolders()) {
+                if (soldier.getId() == idSoldier) {
+                    group.removeSoldier(idSoldier);
+                    flagSoldier = true;
+                    System.out.println("Військовослужбовця видалено");
+                    break;
+                }
+            }
+        }
+        if(!flagSoldier){
+            System.out.println("Такий номер військовослужбовця не існує.");
+        }
+    }
+
+    // add subject
+    public void addSubject(String subject, Group group) {
         for (Soldier soldier : group.getSolders()) {
             soldier.addSubject(subject);
         }
     }
 
-    // display all subjects and grades for group of soldiers
-    public void displayGradesByGroup(Group group) {
-        for (Soldier soldier : group.getSolders()) {
-            System.out.println(soldier);
-            Map<String, List<Integer>> grades = soldier.getGrades().getGradesMap();
-            grades.entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue()).forEach(System.out::println);
-            System.out.println();
+    // display all subjects and grades of course
+    public static void displayAllGrades() {
+        for (Group group : groups) {
+            for (Soldier soldier : group.getSolders()) {
+                System.out.println(soldier);
+                Map<String, List<Integer>> grades = soldier.getGrades().getGradesMap();
+                grades.entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue()).forEach(System.out::println);
+                System.out.println();
+            }
         }
     }
 
-    // display grades for subject
-    public void displayGradesByGroup(Group group, String subject) {
-        System.out.println("Група: " + group.getGroupId());
-        for (Soldier soldier : group.getSolders()) {
-            System.out.println(soldier);
-            Map<String, List<Integer>> grades = soldier.getGrades().getGradesMap();
-            if (grades.get(subject) == null) {
-                System.out.println("Предмет " + subject + " не знайдено");
-            } else
-                System.out.println(subject + ": " + grades.get(subject));
+    // display all grades for group of soldiers
+    public static void displayGradesForGroup() {
+        Scanner scanner = new Scanner(System.in);
+        boolean flagGroup = false;
+        System.out.println("Введіть номер групи: ");
+        int idGroup = scanner.nextInt();
+        for (Group group : groups) {
+            if (group.getGroupId() == idGroup) {
+                flagGroup = true;
+                System.out.println("Група "+idGroup);
+                for (Soldier soldier : group.getSolders()) {
+                    System.out.println(soldier);
+                    Map<String, List<Integer>> grades = soldier.getGrades().getGradesMap();
+                    grades.entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue()).forEach(System.out::println);
+                    System.out.println();
+                }
+            }
         }
-        System.out.println();
+        if(!flagGroup){
+            System.out.println("Даної групи не існує.");
+        }
     }
+
+    // display subject grades per group
+    public static void displaySubjectGradesPerGroup() {
+        Scanner scanner = new Scanner(System.in);
+        Scanner scanSubject = new Scanner(System.in);
+        boolean flagGroup = false;
+        int idGroup = 0;
+        System.out.println("На курсі викладають наступні предмети: ");
+        System.out.println(SubjectsGrades.getSubjects());
+            System.out.println("Введіть номер групи: ");
+            if (scanner.hasNextInt()) {
+                idGroup = scanner.nextInt();
+            } else {
+                System.out.println("Некорректно введено номер групи.");
+                return;
+            }
+        System.out.println("Введіть назву предмету: ");
+        String subject = scanSubject.nextLine();
+        for (Group group : groups) {
+            if (group.getGroupId() == idGroup) {
+                flagGroup = true;
+                System.out.println("Група " + idGroup);
+                for (Soldier soldier : group.getSolders()) {
+                    if (!SubjectsGrades.getSubjects().contains(subject)) {
+                        System.out.println("Предмет " + subject + " не викладають на курсі");
+                        break;
+                    }
+                    System.out.println(soldier);
+                    Map<String, List<Integer>> grades = soldier.getGrades().getGradesMap();
+                    System.out.println(subject + ": " + grades.get(subject));
+                    System.out.println();
+                }
+            }
+        }
+        if (!flagGroup) {
+            System.out.println("Даної групи не існує.");
+        }
+    }
+
+    // add grade to soldier
+    public static void addGradeToSoldier(){
+        boolean flagSoldier = false;
+        displayGradesForGroup();
+        System.out.println("На курсі викладають наступні предмети: ");
+        System.out.println(SubjectsGrades.getSubjects());
+        System.out.println("Введіть номер військовослужбовця : ");
+        Scanner scanId = new Scanner(System.in);
+        int idSoldier = scanId.nextInt();
+        System.out.println("Введіть назву предмету: ");
+        Scanner scanSubj = new Scanner(System.in);
+        String subject = scanSubj.nextLine();
+        System.out.println("Додати оцінку: ");
+        Scanner scanGrade = new Scanner(System.in);
+        int gradeSoldier = scanSubj.nextInt();
+        for (Group group : groups) {
+            for (Soldier soldier : group.getSolders()) {
+                if (soldier.getId() == idSoldier) {
+                    soldier.addGrade(subject,gradeSoldier);
+                    flagSoldier = true;
+                    System.out.println("Оцінку додано");
+                    break;
+                }
+            }
+        }
+        if(!flagSoldier){
+            System.out.println("Такий номер військовослужбовця не існує.");
+        }
+    }
+
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -132,30 +238,16 @@ public class Course {
             printMainMenu();
             mainChoice = scanner.nextInt();
             handleChoiceMainMenu(mainChoice, scanner);
-        } while (mainChoice != 3);
-
-//        System.out.println("1. Військовослужбовці.");
-//        System.out.println("2. Предмети.");
-//        System.out.println("3. Оцінки.");
-//        System.out.println("4. Звіти");
-//        System.out.println("Введіть номер пункту меню та нажміть Enter");
-//
-//        myCourse.displayGradesByGroup(group1);
-//        group1.getSolders().get(1).addGrade("Вища математика", 95);
-//        group1.getSolders().get(1).addGrade("Вища математика", 90);
-//        group1.getSolders().get(1).addGrade("Вища математика", 90);
-//        myCourse.displayGradesByGroup(group1, "Вища математика");
-//        myCourse.addSubjectByGroup("Метрологія", group1);
-//        myCourse.displayGradesByGroup(group1);
-//        group3.removeSoldier(10);
-//        myCourse.displayGradesByGroup(group3);
+        } while (mainChoice != 5);
     }
 
     public static void printMainMenu(){
         System.out.println("Головне меню. Виберіть опцію:");
         System.out.println("1. Особовий склад");
-        System.out.println("2. Предмети та оцінки");
-        System.out.println("3. Вихід");
+        System.out.println("2. Оцінки");
+        System.out.println("3. Предмети");
+        System.out.println("4. Рейтинг");
+        System.out.println("5. Вихід");
         System.out.print("Введіть номер пункту меню та нажміть Enter: ");
     }
 
@@ -165,12 +257,16 @@ public class Course {
                 printSoldierMenu(scanner);
                 break;
             case 2:
-                System.out.println("Ви обрали Варіант 2");
-                // Додайте код для обробки опції 2
+                printSubjectsGradesMenu(scanner);
                 break;
             case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
                 System.out.println("Завершення програми.");
-                // Додайте код для обробки опції 3
                 break;
             default:
                 System.out.println("Невірний вибір. Спробуйте ще раз.");
@@ -178,6 +274,7 @@ public class Course {
         }
     }
 
+    // menu for soldiers
     public static void printSoldierMenu(Scanner scanner){
         int soldierMenuChoice;
         do {
@@ -192,7 +289,7 @@ public class Course {
             handleChoiceSoldierMenu(soldierMenuChoice);
         } while (soldierMenuChoice != 5);
     }
-
+    // submenu for soldiers
     public static void handleChoiceSoldierMenu(int choice){
         switch (choice) {
             case 1:
@@ -205,6 +302,49 @@ public class Course {
                 updateSoldier();
                 break;
             case 4:
+                deleteSoldier();
+                break;
+            case 5:
+                System.out.println("Повернення до головного меню.");
+                break;
+            default:
+                System.out.println("Невірний вибір. Спробуйте ще раз.");
+                break;
+        }
+    }
+
+    // menu for subjects and grades
+    public static void printSubjectsGradesMenu(Scanner scanner){
+        int gradesMenuChoice;
+        do {
+            System.out.println("Виберіть опцію:");
+            System.out.println("1. Відображення оцінок за всі предмети за курс");
+            System.out.println("2. Відображення оцінок за всі предмети за групу");
+            System.out.println("3. Відображення оцінок з предмету за групу");
+            System.out.println("4. Добавити оцінку військовослужбовцю");
+            System.out.println("5. Назад");
+            System.out.print("Введіть номер пункту меню та нажміть Enter: ");
+            gradesMenuChoice = scanner.nextInt();
+            handleChoiceGradesMenu(gradesMenuChoice);
+        } while (gradesMenuChoice != 5);
+    }
+
+    // submenu for subjects and grades
+    public static void handleChoiceGradesMenu(int choice){
+        switch (choice) {
+            case 1:
+                displayAllGrades();
+                break;
+            case 2:
+                displayGradesForGroup();
+                break;
+            case 3:
+                displaySubjectGradesPerGroup();
+                break;
+            case 4:
+                addGradeToSoldier();
+                break;
+            case 5:
                 System.out.println("Повернення до головного меню.");
                 break;
             default:

@@ -4,7 +4,7 @@ import java.util.*;
 
 class SubjectsGrades {
     // List of subjects
-    private final List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
+    private static List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
     // Subjects and grades
     private final Map<String, List<Integer>> gradesMap;
 
@@ -24,7 +24,7 @@ class SubjectsGrades {
     }
 
     // get list of subjects
-    public List<String> getSubjects() {
+    public static List<String> getSubjects() {
         return subjects;
     }
 
