@@ -3,12 +3,12 @@ package com.ejournal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group {
+class Group {
     // group Id
     private final int groupId;
 
     // list of soldiers
-    private List<Soldier> soldiers;
+    private final List<Soldier> soldiers;
 
     //constructor
     public Group(int groupId) {
@@ -28,7 +28,6 @@ public class Group {
 
     // add soldier to group
     public void addSoldier(Soldier soldier) {
-        soldier.setGroupId(this.groupId);
         soldiers.add(soldier);
     }
 

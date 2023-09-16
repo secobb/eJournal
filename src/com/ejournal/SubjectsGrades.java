@@ -4,9 +4,9 @@ import java.util.*;
 
 class SubjectsGrades {
     // List of subjects
-    private static List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
+    private static final List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
     // Subjects and grades
-    private Map<String, List<Integer>> gradesMap;
+    private final Map<String, List<Integer>> gradesMap;
 
     // Constructor
     SubjectsGrades() {

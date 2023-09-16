@@ -1,6 +1,5 @@
 package com.ejournal;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,13 +7,11 @@ class Soldier {
     // count id
     private static int count;
     // Id soldier
-    private int id;
+    private final int id;
     // Name soldier
     private String name;
     // List subjects and grades
     private final SubjectsGrades subjectsGrades;
-    // Group id
-    private int groupId;
 
     // Constructor
     Soldier(String name) {
@@ -26,16 +23,6 @@ class Soldier {
     // get Id
     public int getId() {
         return id;
-    }
-
-    // set groupeId
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    // get name soldier
-    public String getName() {
-        return name;
     }
 
     // set name soldier
@@ -58,13 +45,13 @@ class Soldier {
         int count = 0;
         Map<String, List<Integer>> grades = this.getGrades().getGradesMap();
         for (Map.Entry<String, List<Integer>> subject : grades.entrySet()) {
-            String k = subject.getKey();
+           // String k = subject.getKey();
             for (Integer v : subject.getValue()) {
                 sum += v;
                 count++;
             }
         }
-        return (double) sum / count;
+        return sum / count;
     }
 
     // add subject
@@ -73,9 +60,8 @@ class Soldier {
     }
 
     // remove subject
-    public boolean removeSubject(String subject) {
+    public void removeSubject(String subject) {
         this.getGrades().removeSubject(subject);
-        return true;
     }
 
     @Override

@@ -2,23 +2,18 @@ package com.ejournal;
 
 import java.util.*;
 
-public class Course {
+class Course {
     // list groups
     private static List<Group> groups;
 
     // constructor
     Course() {
-        this.groups = new ArrayList<>();
+        groups = new ArrayList<>();
     }
 
     // add groups to course
     public void setGroups(List<Group> groups) {
-        this.groups = groups;
-    }
-
-    // get list of groups
-    public static List<Group> getGroups() {
-        return groups;
+        Course.groups = groups;
     }
 
     // display list of all soldiers
@@ -143,7 +138,7 @@ public class Course {
     public static void displaySubjectGradesPerGroup() {
         Scanner scanner = new Scanner(System.in);
         boolean flagGroup = false;
-        int idGroup = 0;
+        int idGroup;
         System.out.println("На курсі викладають наступні предмети: ");
         System.out.println(SubjectsGrades.getSubjects());
             System.out.println("Введіть номер групи: ");
@@ -245,7 +240,7 @@ public class Course {
                 totalSoldiers++;
             }
         }
-        System.out.println("Середній бал за весь курс: "+(double) totalGrades / totalSoldiers);
+        System.out.println("Середній бал за весь курс: "+ totalGrades / totalSoldiers);
     }
 
     // average grade for group
@@ -263,13 +258,12 @@ public class Course {
                 }
             }
         }
-        System.out.println("Середній бал за групу "+idGroup+" : "+(double) totalGrades / totalSoldiers);
+        System.out.println("Середній бал за групу "+idGroup+" : "+ totalGrades / totalSoldiers);
     }
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int mainChoice = 0;
+        int mainChoice;
         System.out.println("Електронний журнал обліку успішності");
         Course myCourse = new Course();
         Group group1 = new Group(2101);
