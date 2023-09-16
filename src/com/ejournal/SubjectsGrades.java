@@ -6,7 +6,7 @@ class SubjectsGrades {
     // List of subjects
     private static List<String> subjects = new ArrayList<>(Arrays.asList("Вища математика", "Фізика", "ООП", "Історія України", "Англійська мова"));
     // Subjects and grades
-    private final Map<String, List<Integer>> gradesMap;
+    private Map<String, List<Integer>> gradesMap;
 
     // Constructor
     SubjectsGrades() {
@@ -33,9 +33,14 @@ class SubjectsGrades {
         return subjects.get(index);
     }
 
-    // add subject
+    // add subject to soldier
     public void setSubjects(String subject) {
         gradesMap.put(subject, new ArrayList<>());
+    }
+
+    // add subject to list
+    public static void addSubject(String subject) {
+        subjects.add(subject);
     }
 
     // get subjects and grades

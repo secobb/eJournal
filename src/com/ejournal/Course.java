@@ -104,13 +104,6 @@ public class Course {
         }
     }
 
-    // add subject
-    public void addSubject(String subject, Group group) {
-        for (Soldier soldier : group.getSolders()) {
-            soldier.addSubject(subject);
-        }
-    }
-
     // display all subjects and grades of course
     public static void displayAllGrades() {
         for (Group group : groups) {
@@ -149,7 +142,6 @@ public class Course {
     // display subject grades per group
     public static void displaySubjectGradesPerGroup() {
         Scanner scanner = new Scanner(System.in);
-        Scanner scanSubject = new Scanner(System.in);
         boolean flagGroup = false;
         int idGroup = 0;
         System.out.println("На курсі викладають наступні предмети: ");
@@ -157,12 +149,13 @@ public class Course {
             System.out.println("Введіть номер групи: ");
             if (scanner.hasNextInt()) {
                 idGroup = scanner.nextInt();
+                scanner.nextLine();
             } else {
                 System.out.println("Некорректно введено номер групи.");
                 return;
             }
         System.out.println("Введіть назву предмету: ");
-        String subject = scanSubject.nextLine();
+        String subject = scanner.nextLine();
         for (Group group : groups) {
             if (group.getGroupId() == idGroup) {
                 flagGroup = true;
@@ -175,7 +168,6 @@ public class Course {
                     System.out.println(soldier);
                     Map<String, List<Integer>> grades = soldier.getGrades().getGradesMap();
                     System.out.println(subject + ": " + grades.get(subject));
-                    System.out.println();
                 }
             }
         }
@@ -187,22 +179,21 @@ public class Course {
     // add grade to soldier
     public static void addGradeToSoldier(){
         boolean flagSoldier = false;
-        displayGradesForGroup();
+        displayAll();
         System.out.println("На курсі викладають наступні предмети: ");
         System.out.println(SubjectsGrades.getSubjects());
-        System.out.println("Введіть номер військовослужбовця : ");
-        Scanner scanId = new Scanner(System.in);
-        int idSoldier = scanId.nextInt();
+        System.out.println("Введіть номер військовослужбовця, якому будемо ставити оцінку: ");
+        Scanner scan = new Scanner(System.in);
+        int idSoldier = scan.nextInt();
+        scan.nextLine();
         System.out.println("Введіть назву предмету: ");
-        Scanner scanSubj = new Scanner(System.in);
-        String subject = scanSubj.nextLine();
+        String subject = scan.nextLine();
         System.out.println("Додати оцінку: ");
-        Scanner scanGrade = new Scanner(System.in);
-        int gradeSoldier = scanSubj.nextInt();
+        int gradeSoldier = scan.nextInt();
         for (Group group : groups) {
             for (Soldier soldier : group.getSolders()) {
                 if (soldier.getId() == idSoldier) {
-                    soldier.addGrade(subject,gradeSoldier);
+                    soldier.addGrade(subject, gradeSoldier);
                     flagSoldier = true;
                     System.out.println("Оцінку додано");
                     break;
@@ -214,6 +205,35 @@ public class Course {
         }
     }
 
+    // add subject to course
+    public static void addSubject() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введіть назву предмету, який хочете добавити: ");
+        String subject = scanner.nextLine();
+        SubjectsGrades.addSubject(subject);
+        for (Group group : groups) {
+            for (Soldier soldier : group.getSolders()) {
+                soldier.addSubject(subject);
+            }
+        }
+        System.out.println("Предмет додано");
+    }
+
+    // delete subject from course
+    public static void removeSubject(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введіть назву предмету, який треба видалити: ");
+        String subject = scanner.nextLine();
+        if(SubjectsGrades.getSubjects().contains(subject)){
+            SubjectsGrades.getSubjects().remove(subject);
+            for (Group group : groups) {
+                for (Soldier soldier : group.getSolders()) {
+                    soldier.removeSubject(subject);
+                }
+            }
+            System.out.println("Предмет видалено");
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -257,10 +277,10 @@ public class Course {
                 printSoldierMenu(scanner);
                 break;
             case 2:
-                printSubjectsGradesMenu(scanner);
+                printGradesMenu(scanner);
                 break;
             case 3:
-
+                printSubjectsMenu(scanner);
                 break;
             case 4:
 
@@ -313,8 +333,8 @@ public class Course {
         }
     }
 
-    // menu for subjects and grades
-    public static void printSubjectsGradesMenu(Scanner scanner){
+    // menu for grades
+    public static void printGradesMenu(Scanner scanner){
         int gradesMenuChoice;
         do {
             System.out.println("Виберіть опцію:");
@@ -345,6 +365,42 @@ public class Course {
                 addGradeToSoldier();
                 break;
             case 5:
+                System.out.println("Повернення до головного меню.");
+                break;
+            default:
+                System.out.println("Невірний вибір. Спробуйте ще раз.");
+                break;
+        }
+    }
+
+    //menu for Subjects
+    public static void printSubjectsMenu(Scanner scanner){
+        int subjectsMenuChoice;
+        do {
+            System.out.println("Виберіть опцію:");
+            System.out.println("1. Показати всі предмети на курсі");
+            System.out.println("2. Додати предмет для вивчення на курсі");
+            System.out.println("3. Видалити предмет з вивчення на курсі");
+            System.out.println("4. Назад");
+            System.out.print("Введіть номер пункту меню та нажміть Enter: ");
+            subjectsMenuChoice = scanner.nextInt();
+            handleChoiceSubjectsMenu(subjectsMenuChoice);
+        } while (subjectsMenuChoice != 4);
+    }
+
+    // submenu for subjects and grades
+    public static void handleChoiceSubjectsMenu(int choice){
+        switch (choice) {
+            case 1:
+                System.out.println(SubjectsGrades.getSubjects());
+                break;
+            case 2:
+                addSubject();
+                break;
+            case 3:
+                removeSubject();
+                break;
+            case 4:
                 System.out.println("Повернення до головного меню.");
                 break;
             default:
