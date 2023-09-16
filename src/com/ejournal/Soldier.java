@@ -56,7 +56,7 @@ class Soldier {
 
     // remove subject
     public boolean removeSubject(String subject) {
-        this.getGrades().getSubjects().remove(subject);
+        this.getGrades().removeSubject(subject);
         return true;
     }
 

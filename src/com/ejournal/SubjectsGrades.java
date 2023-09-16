@@ -18,7 +18,7 @@ class SubjectsGrades {
     public void initializeSubjects() {
         int i = 0;
         while (i < getSubjects().size()) {
-            this.gradesMap.put(getSubject(i), new ArrayList<>());
+            this.gradesMap.put(getSubject(i), new ArrayList<>(Arrays.asList(90,85,80,75)));
             i++;
         }
     }
@@ -31,6 +31,10 @@ class SubjectsGrades {
     // get one subject
     public String getSubject(int index) {
         return subjects.get(index);
+    }
+
+    public void removeSubject(String subject){
+        this.gradesMap.remove(subject);
     }
 
     // add subject to soldier
