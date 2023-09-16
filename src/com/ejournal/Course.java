@@ -235,6 +235,37 @@ public class Course {
         }
     }
 
+    // average grade for course
+    public static void getAverageGradeForCourse(){
+        double totalGrades = 0;
+        int totalSoldiers = 0;
+        for (Group group : groups) {
+            for (Soldier soldier : group.getSolders()) {
+                totalGrades+=soldier.getAverageGrade();
+                totalSoldiers++;
+            }
+        }
+        System.out.println("Середній бал за весь курс: "+(double) totalGrades / totalSoldiers);
+    }
+
+    // average grade for group
+    public static void getAverageGradeByGroup(){
+        Scanner scanner = new Scanner(System.in);
+        double totalGrades = 0;
+        int totalSoldiers = 0;
+        System.out.println("Введіть номер групи:");
+        int idGroup = scanner.nextInt();
+        for (Group group : groups) {
+            if(group.getGroupId() == idGroup) {
+                for (Soldier soldier : group.getSolders()) {
+                    totalGrades += soldier.getAverageGrade();
+                    totalSoldiers++;
+                }
+            }
+        }
+        System.out.println("Середній бал за групу "+idGroup+" : "+(double) totalGrades / totalSoldiers);
+    }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -266,7 +297,7 @@ public class Course {
         System.out.println("1. Особовий склад");
         System.out.println("2. Оцінки");
         System.out.println("3. Предмети");
-        System.out.println("4. Рейтинг");
+        System.out.println("4. Рейтинг успішності");
         System.out.println("5. Вихід");
         System.out.print("Введіть номер пункту меню та нажміть Enter: ");
     }
@@ -283,7 +314,7 @@ public class Course {
                 printSubjectsMenu(scanner);
                 break;
             case 4:
-
+                printRatingMenu(scanner);
                 break;
             case 5:
                 System.out.println("Завершення програми.");
@@ -401,6 +432,38 @@ public class Course {
                 removeSubject();
                 break;
             case 4:
+                System.out.println("Повернення до головного меню.");
+                break;
+            default:
+                System.out.println("Невірний вибір. Спробуйте ще раз.");
+                break;
+        }
+    }
+
+    // menu for rating
+    public static void printRatingMenu(Scanner scanner){
+        int ratingMenuChoice;
+        do {
+            System.out.println("Виберіть опцію:");
+            System.out.println("1. Показати рейтинг успішності курсу");
+            System.out.println("2. Показати рейтинг успішності групи");
+            System.out.println("3. Назад");
+            System.out.print("Введіть номер пункту меню та нажміть Enter: ");
+            ratingMenuChoice = scanner.nextInt();
+            handleChoiceRatingMenu(ratingMenuChoice);
+        } while (ratingMenuChoice != 3);
+    }
+
+    // submenu for rating
+    public static void handleChoiceRatingMenu(int choice){
+        switch (choice) {
+            case 1:
+                getAverageGradeForCourse();
+                break;
+            case 2:
+                getAverageGradeByGroup();
+                break;
+            case 3:
                 System.out.println("Повернення до головного меню.");
                 break;
             default:

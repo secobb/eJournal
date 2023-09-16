@@ -1,5 +1,9 @@
 package com.ejournal;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 class Soldier {
     // count id
     private static int count;
@@ -47,6 +51,20 @@ class Soldier {
     // add grade
     public void addGrade(String subject, int grade) {
         this.getGrades().setGradesMap(subject, grade);
+    }
+    // get average grade
+    public double getAverageGrade() {
+        double sum = 0;
+        int count = 0;
+        Map<String, List<Integer>> grades = this.getGrades().getGradesMap();
+        for (Map.Entry<String, List<Integer>> subject : grades.entrySet()) {
+            String k = subject.getKey();
+            for (Integer v : subject.getValue()) {
+                sum += v;
+                count++;
+            }
+        }
+        return (double) sum / count;
     }
 
     // add subject
