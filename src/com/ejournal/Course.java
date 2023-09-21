@@ -76,7 +76,7 @@ class Course {
         }
     }
 
-    // delete soldier
+    // remove soldier
     public static void deleteSoldier(){
         Scanner scanner = new Scanner(System.in);
         int idSoldier;
@@ -286,7 +286,8 @@ class Course {
         } while (mainChoice != 5);
     }
 
-    public static void printMainMenu(){
+    // main menu
+    private static void printMainMenu(){
         System.out.println("Головне меню. Виберіть опцію:");
         System.out.println("1. Особовий склад");
         System.out.println("2. Оцінки");
@@ -295,8 +296,7 @@ class Course {
         System.out.println("5. Вихід");
         System.out.print("Введіть номер пункту меню та нажміть Enter: ");
     }
-
-    public static void handleChoiceMainMenu(int choice, Scanner scanner){
+    private static void handleChoiceMainMenu(int choice, Scanner scanner){
         switch (choice) {
             case 1:
                 printSoldierMenu(scanner);
@@ -320,7 +320,7 @@ class Course {
     }
 
     // menu for soldiers
-    public static void printSoldierMenu(Scanner scanner){
+    private static void printSoldierMenu(Scanner scanner){
         int soldierMenuChoice;
         do {
             System.out.println("Виберіть опцію:");
@@ -334,8 +334,8 @@ class Course {
             handleChoiceSoldierMenu(soldierMenuChoice);
         } while (soldierMenuChoice != 5);
     }
-    // submenu for soldiers
-    public static void handleChoiceSoldierMenu(int choice){
+
+    private static void handleChoiceSoldierMenu(int choice){
         switch (choice) {
             case 1:
                 displayAll();
@@ -359,7 +359,7 @@ class Course {
     }
 
     // menu for grades
-    public static void printGradesMenu(Scanner scanner){
+    private static void printGradesMenu(Scanner scanner){
         int gradesMenuChoice;
         do {
             System.out.println("Виберіть опцію:");
@@ -374,8 +374,7 @@ class Course {
         } while (gradesMenuChoice != 5);
     }
 
-    // submenu for subjects and grades
-    public static void handleChoiceGradesMenu(int choice){
+    private static void handleChoiceGradesMenu(int choice){
         switch (choice) {
             case 1:
                 displayAllGrades();
@@ -399,7 +398,7 @@ class Course {
     }
 
     //menu for Subjects
-    public static void printSubjectsMenu(Scanner scanner){
+    private static void printSubjectsMenu(Scanner scanner){
         int subjectsMenuChoice;
         do {
             System.out.println("Виберіть опцію:");
@@ -413,8 +412,7 @@ class Course {
         } while (subjectsMenuChoice != 4);
     }
 
-    // submenu for subjects and grades
-    public static void handleChoiceSubjectsMenu(int choice){
+    private static void handleChoiceSubjectsMenu(int choice){
         switch (choice) {
             case 1:
                 System.out.println(SubjectsGrades.getSubjects());
@@ -435,7 +433,7 @@ class Course {
     }
 
     // menu for rating
-    public static void printRatingMenu(Scanner scanner){
+    private static void printRatingMenu(Scanner scanner){
         int ratingMenuChoice;
         do {
             System.out.println("Виберіть опцію:");
@@ -448,8 +446,7 @@ class Course {
         } while (ratingMenuChoice != 3);
     }
 
-    // submenu for rating
-    public static void handleChoiceRatingMenu(int choice){
+    private static void handleChoiceRatingMenu(int choice){
         switch (choice) {
             case 1:
                 getAverageGradeForCourse();

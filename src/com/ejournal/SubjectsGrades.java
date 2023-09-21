@@ -52,6 +52,7 @@ class SubjectsGrades {
         return gradesMap;
     }
 
+    // add grade
     public void setGradesMap(String subject, int grade) {
         if (this.gradesMap.containsKey(subject)) {
             this.gradesMap.get(subject).add(grade);

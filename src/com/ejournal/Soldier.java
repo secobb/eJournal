@@ -45,7 +45,6 @@ class Soldier {
         int count = 0;
         Map<String, List<Integer>> grades = this.getGrades().getGradesMap();
         for (Map.Entry<String, List<Integer>> subject : grades.entrySet()) {
-           // String k = subject.getKey();
             for (Integer v : subject.getValue()) {
                 sum += v;
                 count++;
